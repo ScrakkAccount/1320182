@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Mail, MessageSquare, HelpCircle, ExternalLink } from 'lucide-react';
 
 const SupportPage = () => {
-  const supportEmail = "jcgtmgm@gmail.com";
+  const supportEmail = "ryvenshop@gmail.com";
   const discordInviteLink = "https://discord.com/invite/2FSkAJPHxY";
 
   const contactOptions = [
