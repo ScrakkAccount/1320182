@@ -206,6 +206,8 @@ const AdminProductsPage = () => {
       imageUrl: product.image_url || ''
     });
     setImagePreview(product.image_url || '');
+    // Cambiar a la pestaña de edición
+    document.querySelector('button[value="add"]').click();
   };
 
   const handleSubmit = async (e) => {
