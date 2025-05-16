@@ -28,6 +28,7 @@ const AdminProductsPage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
+  const [activeTab, setActiveTab] = useState("products");
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -193,6 +194,7 @@ const AdminProductsPage = () => {
     setImageFile(null);
     setImagePreview('');
     setSelectedProduct(null);
+    setActiveTab("products");
   };
 
   const handleEditProduct = (product) => {
@@ -206,8 +208,8 @@ const AdminProductsPage = () => {
       imageUrl: product.image_url || ''
     });
     setImagePreview(product.image_url || '');
-    // Cambiar a la pestaña de edición
-    document.querySelector('button[value="add"]').click();
+    // Cambiar a la pestaña de edición usando estado
+    setActiveTab("add");
   };
 
   const handleSubmit = async (e) => {
@@ -297,7 +299,7 @@ const AdminProductsPage = () => {
         <h1 className="text-4xl font-bold mb-4 gradient-text">Administrar Productos</h1>
       </motion.div>
 
-      <Tabs defaultValue="products" className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid grid-cols-2 w-full max-w-md mx-auto mb-8">
           <TabsTrigger value="products">
             <ShoppingBag className="mr-2 h-4 w-4" /> 
@@ -320,7 +322,7 @@ const AdminProductsPage = () => {
                 <div className="col-span-full text-center p-10">
                   <p className="text-muted-foreground">No hay productos disponibles.</p>
                   <Button 
-                    onClick={() => document.querySelector('button[value="add"]').click()}
+                    onClick={() => setActiveTab("add")}
                     className="mt-4 bg-primary hover:bg-primary/90"
                   >
                     <Plus className="mr-2 h-4 w-4" /> Añadir Producto
@@ -409,6 +411,11 @@ const AdminProductsPage = () => {
                   </>
                 )}
               </CardTitle>
+              {selectedProduct && (
+                <p className="text-muted-foreground text-sm mt-2">
+                  Editando producto ID: {selectedProduct.id}
+                </p>
+              )}
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
