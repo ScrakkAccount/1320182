@@ -198,7 +198,7 @@ const ShopPage = () => {
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-6 sm:space-y-12">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -209,7 +209,7 @@ const ShopPage = () => {
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 10 }}
-          className="text-5xl font-extrabold mb-4 gradient-text"
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 sm:mb-4 gradient-text"
         >
           Catálogo Digital
         </motion.h1>
@@ -217,7 +217,7 @@ const ShopPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.7 }}
-          className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8"
+          className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 sm:mb-8 px-2"
         >
           Explora nuestra diversa selección de productos digitales. Selecciona un artículo para iniciar tu pedido.
         </motion.p>
@@ -226,22 +226,22 @@ const ShopPage = () => {
           initial={{ opacity: 0, width: "80%" }}
           animate={{ opacity: 1, width: "100%" }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="relative max-w-md mx-auto mb-10"
+          className="relative max-w-md mx-auto mb-6 sm:mb-10 px-4 sm:px-0"
         >
           <Input
             type="text"
             placeholder="Buscar productos..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 py-6 bg-black/20 border-primary/30 focus:border-primary/60"
+            className="pl-10 py-4 sm:py-6 bg-black/20 border-primary/30 focus:border-primary/60"
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <Search className="absolute left-6 sm:left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         </motion.div>
       </motion.div>
 
       {loading ? (
-        <div className="flex justify-center py-20">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+        <div className="flex justify-center py-12 sm:py-20">
+          <div className="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-primary"></div>
         </div>
       ) : (
         <AnimatePresence mode="wait">
@@ -251,16 +251,16 @@ const ShopPage = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 px-2 sm:px-0"
           >
             {filteredProducts.length === 0 ? (
               <motion.div 
-                className="col-span-full text-center py-16"
+                className="col-span-full text-center py-10 sm:py-16"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <p className="text-xl text-muted-foreground">No se encontraron productos para tu búsqueda.</p>
+                <p className="text-lg sm:text-xl text-muted-foreground">No se encontraron productos para tu búsqueda.</p>
               </motion.div>
             ) : (
               filteredProducts.map((product, index) => {
@@ -274,7 +274,8 @@ const ShopPage = () => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    whileHover={{ scale: 1.05, y: -10 }}
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    className="h-full"
                   >
                     <Card className="h-full flex flex-col glassmorphism overflow-hidden border-primary/30 hover:border-primary transition-all duration-300">
                       {product.image_url ? (
@@ -285,51 +286,51 @@ const ShopPage = () => {
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute top-2 right-2 p-2 bg-black/50 rounded-full">
-                            <IconComponent className="h-6 w-6 text-primary" />
+                            <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                           </div>
                         </div>
                       ) : (
-                        <CardHeader className="items-center text-center p-6 bg-black/30">
+                        <CardHeader className="items-center text-center p-4 sm:p-6 bg-black/30">
                           <motion.div 
-                            className="p-3 bg-primary/20 rounded-full mb-3"
+                            className="p-2 sm:p-3 bg-primary/20 rounded-full mb-2 sm:mb-3"
                             animate={{ rotate: [0, 5, 0] }}
                             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                           >
-                            <IconComponent className="h-8 w-8 text-primary" />
+                            <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                           </motion.div>
-                          <CardTitle className="text-2xl font-semibold text-foreground">{product.name}</CardTitle>
-                          <CardDescription className="text-sm text-muted-foreground">{product.category}</CardDescription>
+                          <CardTitle className="text-xl sm:text-2xl font-semibold text-foreground">{product.name}</CardTitle>
+                          <CardDescription className="text-xs sm:text-sm text-muted-foreground">{product.category}</CardDescription>
                         </CardHeader>
                       )}
                       
                       {product.image_url && (
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-2xl font-semibold text-foreground">{product.name}</CardTitle>
-                          <CardDescription className="text-sm text-muted-foreground">{product.category}</CardDescription>
+                        <CardHeader className="pb-1 sm:pb-2 p-4 sm:p-6">
+                          <CardTitle className="text-xl sm:text-2xl font-semibold text-foreground">{product.name}</CardTitle>
+                          <CardDescription className="text-xs sm:text-sm text-muted-foreground">{product.category}</CardDescription>
                         </CardHeader>
                       )}
                       
-                      <CardContent className="flex-grow p-6 flex flex-col">
-                        <div className="text-muted-foreground text-sm leading-relaxed flex-grow mb-6">
+                      <CardContent className="flex-grow p-4 sm:p-6 flex flex-col">
+                        <div className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-grow mb-4 sm:mb-6">
                           {product.description.split('\n').map((line, i) => (
                             <p key={i} className="mb-1">{line}</p>
                           ))}
                         </div>
                         <motion.div 
-                          className="flex items-center justify-center text-3xl font-bold text-primary mt-auto"
+                          className="flex items-center justify-center text-2xl sm:text-3xl font-bold text-primary mt-auto"
                           whileHover={{ scale: 1.1 }}
                           transition={{ type: "spring", stiffness: 300, damping: 10 }}
                         >
-                          <DollarSign className="h-7 w-7 mr-1" /> {product.price.toFixed(2)}
+                          <DollarSign className="h-6 w-6 sm:h-7 sm:w-7 mr-1" /> {product.price.toFixed(2)}
                         </motion.div>
                       </CardContent>
-                      <CardFooter className="p-6 border-t border-border/40">
+                      <CardFooter className="p-4 sm:p-6 border-t border-border/40">
                         <motion.div className="w-full" whileTap={{ scale: 0.95 }}>
                           <Button 
-                            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-md py-3"
+                            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-md py-2 sm:py-3"
                             onClick={() => setSelectedProduct(product)}
                           >
-                            <ShoppingBag className="mr-2 h-5 w-5" /> Comprar Ahora
+                            <ShoppingBag className="mr-2 h-4 w-4 sm:h-5 sm:w-5" /> Comprar Ahora
                           </Button>
                         </motion.div>
                       </CardFooter>
@@ -358,14 +359,14 @@ const ShopPage = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 50 }}
               transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 25 }}
-              className="bg-background p-8 rounded-xl shadow-2xl w-full max-w-lg border border-primary/50 glassmorphism"
+              className="bg-background p-5 sm:p-8 rounded-xl shadow-2xl w-full max-w-lg border border-primary/50 glassmorphism max-h-[95vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <motion.h2 
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="text-3xl font-bold mb-2 text-primary"
+                className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-primary"
               >
                 Pedido: {selectedProduct.name}
               </motion.h2>
@@ -373,12 +374,12 @@ const ShopPage = () => {
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-muted-foreground mb-6"
+                className="text-muted-foreground mb-4 sm:mb-6"
               >
                 Precio: ${selectedProduct.price.toFixed(2)}
               </motion.p>
               
-              <form onSubmit={handleSubmitOrder} className="space-y-6">
+              <form onSubmit={handleSubmitOrder} className="space-y-5 sm:space-y-6">
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -494,11 +495,11 @@ const ShopPage = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 50 }}
               transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 25 }}
-              className="bg-background p-8 rounded-xl shadow-2xl w-full max-w-md border border-primary/50 glassmorphism"
+              className="bg-background p-5 sm:p-8 rounded-xl shadow-2xl w-full max-w-md border border-primary/50 glassmorphism max-h-[95vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-start mb-4">
-                <h2 className="text-3xl font-bold text-primary">¡Pedido Realizado!</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold text-primary">¡Pedido Realizado!</h2>
                 <Button 
                   variant="ghost" 
                   size="icon" 
@@ -509,15 +510,15 @@ const ShopPage = () => {
                 </Button>
               </div>
               
-              <div className="space-y-6 mb-6">
+              <div className="space-y-4 sm:space-y-6 mb-4 sm:mb-6">
                 <div className="bg-primary/10 p-4 rounded-lg border border-primary/30">
-                  <p className="text-lg mb-2">Tu pedido <span className="font-bold text-primary">{successOrder.productName}</span> ha sido registrado.</p>
+                  <p className="text-base sm:text-lg mb-2">Tu pedido <span className="font-bold text-primary">{successOrder.productName}</span> ha sido registrado.</p>
                   <div className="flex items-center justify-between bg-black/30 p-3 rounded-md">
-                    <p className="font-mono text-lg text-primary font-bold">{successOrder.orderId}</p>
+                    <p className="font-mono text-base sm:text-lg text-primary font-bold break-all">{successOrder.orderId}</p>
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="border-primary/30 text-primary hover:bg-primary/10"
+                      className="border-primary/30 text-primary hover:bg-primary/10 shrink-0 ml-2"
                       onClick={() => copyToClipboard(successOrder.orderId)}
                     >
                       {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
@@ -526,8 +527,8 @@ const ShopPage = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <p className="text-center text-muted-foreground">Serás contactado en Discord para completar la compra.</p>
-                  <p className="text-center text-sm text-muted-foreground">Asegúrate de guardar el ID de tu pedido.</p>
+                  <p className="text-center text-sm sm:text-base text-muted-foreground">Serás contactado en Discord para completar la compra.</p>
+                  <p className="text-center text-xs sm:text-sm text-muted-foreground">Asegúrate de guardar el ID de tu pedido.</p>
                 </div>
                 
                 <div className="flex flex-col space-y-3">
